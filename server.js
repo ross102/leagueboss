@@ -3,20 +3,27 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const cors = require('cors');
+const methodOveride = require('method-override');
 const port = process.env.PORT || 5000;
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/Eazibusi105', {
+mongoose.connect('mongodb://localhost:27017/mock101', {
 	useNewUrlParser: true,
 	useCreateIndex: true
 });
-
 // error messages from db
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongoDb connection error'));
 
 // initialize express server
 const server = express();
+
+// set view engine
+server.set('view engine', 'ejs');
+//static files
+app.use(express.static(__dirname + '/public'));
+// config method-override
+app.use(methodOveride('_method'));
 
 // cors allow all requests
 server.use(cors());
