@@ -1,19 +1,31 @@
 process.env.NODE_ENV !== 'production' && require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const redis = require('redis');
 const session = require('express-session');
 const cors = require('cors');
 const methodOveride = require('method-override');
 const port = process.env.PORT || 5000;
+const redis_port = process.env.PORT || 6379;
 
 //require routes
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 
+// redis config
+let Redis_store = require('connect-redis')(session);
+let client = redis.createClient(redis_port);
+
+//check if err
+client.on('error', (err) => {
+	console.log('redis client error: ' + err);
+});
+
 // connect to the database
 mongoose.connect('mongodb://localhost:27017/mock101', {
 	useNewUrlParser: true,
-	useCreateIndex: true
+	useCreateIndex: true,
+	useUnifiedTopology: true
 });
 // error messages from db
 const db = mongoose.connection;
@@ -40,7 +52,9 @@ server.use(express.urlencoded({ extended: true }));
 //Configure Sessions
 server.use(
 	session({
-		secret: 'lions are very nice',
+		store: new Redis_store({ client, ttl: 86400 }),
+		cookie: { secure: false },
+		secret: process.env.SECRETSESS,
 		resave: false,
 		saveUninitialized: false
 	})
