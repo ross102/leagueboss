@@ -5,12 +5,12 @@ const redis = require('redis');
 const session = require('express-session');
 const cors = require('cors');
 const methodOveride = require('method-override');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 const redis_port = process.env.PORT || 6379;
 
 //require routes
 const indexRoute = require('./routes/index');
-const userRoute = require('./routes/user');
+const userRoute = require('./routes/api');
 
 // redis config
 let Redis_store = require('connect-redis')(session);
@@ -66,11 +66,11 @@ server.use(function(req, res, next) {
 
 //  configure routes
 server.use('/', indexRoute);
-server.use('/user', userRoute);
+server.use('/api', userRoute);
 
 server.listen(port, (err) => {
 	if (err) throw err;
-	console.log('> now running on port 5000');
+	console.log('> now running on port 3000');
 });
 
 module.exports = server;
