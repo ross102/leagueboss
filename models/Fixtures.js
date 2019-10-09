@@ -2,16 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const fixtureSchema = new Schema({
-	first_team: {
-		type: String
+	fixtures: {
+		first_team: String,
+		second_team: String
 	},
-	second_team: {
-		type: String
-	},
-	play_date: String,
+	play_date: Date,
 	play_time: String,
-	is_completed: false,
-	competition_result: String,
+	is_completed: {
+		type: Boolean,
+		default: false
+	},
+	completed_result: {
+		first_team_score: {
+			type: Number
+		},
+		second_team_score: {
+			type: Number
+		}
+	},
 	created: {
 		type: Date,
 		default: Date.now

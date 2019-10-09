@@ -11,6 +11,7 @@ const redis_port = process.env.PORT || 6379;
 //require routes
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/api');
+const searchRoute = require('./routes/search');
 
 // redis config
 let Redis_store = require('connect-redis')(session);
@@ -67,6 +68,7 @@ server.use(function(req, res, next) {
 //  configure routes
 server.use('/', indexRoute);
 server.use('/api', userRoute);
+server.use(searchRoute);
 
 server.listen(port, (err) => {
 	if (err) throw err;

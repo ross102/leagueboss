@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 router.get('/', (req, res) => {
 	res.render('index');
 });
-//sign up
+//sign up for user and admin
 router.post('/register', (req, res) => {
 	// some validations
 	if (req.body.name.length < 3) {
@@ -89,7 +89,7 @@ router.post('/register', (req, res) => {
 		});
 	});
 });
-
+// user and admin login
 router.post('/login', (req, res) => {
 	const { email, password } = req.body;
 	if (!email || !password) {
@@ -141,7 +141,5 @@ router.post('/login', (req, res) => {
 			});
 		});
 });
-
-module.exports = router;
 
 module.exports = router;
