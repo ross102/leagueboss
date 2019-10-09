@@ -21,8 +21,8 @@ router.get('/fixtures/:completed', (req, res) => {
 });
 
 // fuzzy search for teams
-router.get('/api/teams/search', (req, res) => {
-	if (req.search.query) {
+router.get('/teams/search', (req, res) => {
+	if (req.query.search) {
 		let search = req.query.search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 		search = new RegExp(search, 'gi');
 		Team.find({ name: search })
@@ -37,9 +37,9 @@ router.get('/api/teams/search', (req, res) => {
 			});
 	}
 });
-
-router.get('/api/teams/fixtures', (req, res) => {
-	if (req.search.query) {
+// fuzzy search for fixtures
+router.get('/teams/fixtures', (req, res) => {
+	if (req.query.search) {
 		let search = req.query.search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 		search = new RegExp(search, 'gi');
 		Fixture.find({
