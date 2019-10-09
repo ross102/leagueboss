@@ -6,7 +6,7 @@ const Fixture = require('../models/Fixtures');
 const { isloggedIn, isAdmin } = require('../middleware');
 
 // unique link that serves scores of completed fixtures
-router.get('/fixtures/:completed', (req, res) => {
+router.get('/fixtures/:completed', isloggedIn, (req, res) => {
 	Fixture.find({}, (err, matches) => {
 		if (err) throw err;
 		let first_score = Math.floor(Math.random() * Math.floor(5));
@@ -20,7 +20,7 @@ router.get('/fixtures/:completed', (req, res) => {
 	});
 });
 
-// fuzzy search for teams
+// fuzzy search for teams for the public
 router.get('/teams/search', (req, res) => {
 	if (req.query.search) {
 		let search = req.query.search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -37,7 +37,7 @@ router.get('/teams/search', (req, res) => {
 			});
 	}
 });
-// fuzzy search for fixtures
+// fuzzy search for fixtures for the public
 router.get('/teams/fixtures', (req, res) => {
 	if (req.query.search) {
 		let search = req.query.search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
