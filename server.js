@@ -20,9 +20,9 @@ let client = redis.createClient(redis_port);
 client.on('error', (err) => {
 	console.log('redis client error: ' + err);
 });
-
+//'mongodb://localhost:27017/mock101'
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/mock101', {
+mongoose.connect(process.env.DATABASEURL, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true

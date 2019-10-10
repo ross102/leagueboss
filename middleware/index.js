@@ -14,7 +14,6 @@ const middleware = {
 		}
 		jwt.verify(token, process.env.SECRETORKEY, (err, verified) => {
 			if (err) throw new Error(err);
-			req.session = verified;
 			return next();
 		});
 	},
@@ -30,7 +29,6 @@ const middleware = {
 		}
 		jwt.verify(token, process.env.SECRETORKEY, (err, verified) => {
 			if (err) throw err;
-			req.session = verified;
 			if (req.session.isAdmin) return next();
 			return res.json({
 				success: 'false',

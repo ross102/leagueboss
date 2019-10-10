@@ -83,8 +83,10 @@ router.get('/teams', isloggedIn, (req, res) => {
 // create fixtures
 router.post('/fixtures/new', isAdmin, async (req, res) => {
 	// only create fixtures for teams that exist in the database
+	req.body.first_team.toLowerCase();
+	req.body.second_team.toLowerCase();
 	const teamA = await Team.findOne({ name: req.body.first_team });
-	if (!teamA) {
+	if (teamA == '') {
 		return res.status(401).json({ msg: 'Pls input a team that exists in league' });
 	}
 	const teamB = await Team.findOne({ name: req.body.second_team });
@@ -116,6 +118,10 @@ router.post('/fixtures/remove/:id', isAdmin, (req, res) => {
 });
 // edit fixtures
 router.post('/fixtures/edit/:id', isAdmin, async (req, res) => {
+	//set to lower case
+	req.body.first_team.toLowerCase();
+	req.body.second_team.toLowerCase();
+	//get the scores
 	let match = await Fixture.findById(req.params.id);
 	match.fixtures.first_team = req.body.first_team;
 	match.fixtures.second_team = req.body.second_team;
@@ -137,7 +143,6 @@ router.get('/fixtures', async (req, res) => {
 	});
 });
 
-// generate unique links for fixtures
 router.get('/fixtures/:id', async (req, res) => {
 	let fixture = await Fixture.findById(req.params.id);
 	return res.status(200).json({

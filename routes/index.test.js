@@ -1,5 +1,5 @@
+//=== tested for all routes here ===
 process.env.NODE_ENV !== 'production' && require('dotenv').config();
-
 const request = require('supertest');
 const { server, mongoose, cors, client, Redis_store } = require('../utils');
 
@@ -8,7 +8,7 @@ const { server, mongoose, cors, client, Redis_store } = require('../utils');
 // });
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/mock101', {
+mongoose.connect(process.env.DATABASEURL, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true

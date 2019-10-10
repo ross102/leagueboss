@@ -9,9 +9,9 @@ const { isloggedIn, isAdmin } = require('../middleware');
 router.get('/fixtures/:completed', isloggedIn, (req, res) => {
 	Fixture.find({}, (err, matches) => {
 		if (err) throw err;
-		let first_score = Math.floor(Math.random() * Math.floor(5));
-		let second_score = Math.floor(Math.random() * Math.floor(5));
 		matches.map((match) => {
+			let first_score = Math.floor(Math.random() * Math.floor(5));
+			let second_score = Math.floor(Math.random() * Math.floor(5));
 			match.is_completed = true;
 			match.completed_result.first_team_score = first_score;
 			match.completed_result.second_team_score = second_score;
@@ -43,10 +43,14 @@ router.get('/teams/fixtures', (req, res) => {
 		let search = req.query.search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 		search = new RegExp(search, 'gi');
 		Fixture.find({
-			'fixtures.first_team': search,
-			$or: {
-				'fixtures.second_team': search
-			}
+			$or: [
+				{
+					'fixtures.second_team': search
+				},
+				{
+					'fixtures.first_team': search
+				}
+			]
 		})
 			.then((found) => {
 				if (found.length > 0) {

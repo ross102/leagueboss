@@ -24,7 +24,7 @@ client.on('error', (err) => {
 });
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/mock101', {
+mongoose.connect(process.env.DATABASEURL, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true
