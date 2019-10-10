@@ -12,7 +12,6 @@ const redis_port = process.env.PORT || 6379;
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/api');
 const searchRoute = require('./routes/search');
-
 // redis config
 let Redis_store = require('connect-redis')(session);
 let client = redis.createClient(redis_port);
