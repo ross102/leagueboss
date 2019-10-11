@@ -7,7 +7,7 @@ const session = require('express-session');
 const cors = require('cors');
 const redis_mock = require('redis-mock');
 
-const redis_port = process.env.PORT || 6379;
+const redis_port = process.env.REDIS_URL || 6379;
 
 //require routes
 const indexRoute = require('./routes/index');
