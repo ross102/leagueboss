@@ -4,6 +4,8 @@
 <h2>Roles </h2>
 <p>There are admin, user and public roles </p>
 <p>made use of Bearer token for authentication and authorization </p>
+<h2>Documentation </h2>
+<a> <a href="https://documenter.getpostman.com/view/5842835/SVtVTntb?version=latest"> click here </a>
 <h2> Tools Stack I Used </h2>
 <ul>
 <li>NodeJs </li>
