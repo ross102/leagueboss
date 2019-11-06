@@ -1,6 +1,6 @@
 <h2> League boss </h2>
+<h5> A backened Project </h5>
 <p> League boss is a mock version of the premier league api. It aims to replicate certain api functions of a football league </p>
-<p> The live version of the website api along with it's documentation can be found here <a href="https://leagueboss.herokuapp.com">mock-premier </p>
 <h2>Roles </h2>
 <p>There are admin, user and public roles </p>
 <p>made use of Bearer token for authentication and authorization </p>
