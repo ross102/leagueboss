@@ -4,8 +4,6 @@
 <h2>Roles </h2>
 <p>There are admin, user and public roles </p>
 <p>made use of Bearer token for authentication and authorization </p>
-<h2>Documentation </h2>
-
 <h2> Tools Stack I Used </h2>
 <ul>
 <li>NodeJs </li>
